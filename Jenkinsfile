@@ -21,11 +21,11 @@ pipeline{
         stage("push to docker hub"){
             steps{
                 script{
-                   withCredentials([string(credentialsId: 'dockerhub-newpwd', variable: 'dockerhubnewpwd')]) {
-                      bat 'docker login -u cgg2024 -p ${dockerhubnewpwd}'
-                      
-                      bat 'docker push  cgg2024/devops-integration'
-                 }
+                  withCredentials([string(credentialsId: 'docker-hub-pwd', variable: 'dockerhubpwd')]) {
+                     
+                    bat 'docker login -u cgg2024 -p %dockerhubpwd%'
+                    bat 'docker push cgg2024/devops-integration'
+}
             }
         }
     }
